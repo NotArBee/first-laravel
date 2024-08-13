@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,26 +11,79 @@ Route::get('/', function () {
 });
 
 Route::get('/about', function () {
-    return view('about', 
-    [
-        'title' => 'About Page',
-        'nama' => 'Muhammad Dani Arya Putra',
-        'jurusan' => 'Sistem Informasi'
+    return view(
+        'about',
+        [
+            'title' => 'About Page',
+            'nama' => 'Muhammad Dani Arya Putra',
+            'jurusan' => 'Sistem Informasi'
+        ]
+    );
+});
+
+Route::get('posts', function () {
+    return view('posts', [
+        'title' => 'Blog Page',
+        'posts' => [
+            [
+                'id' => 1,
+                'slug' => 'judul-artikel-1',
+                'article_title' => 'Judul Artikel 1',
+                'author' => 'Muhammad Dani Arya Putra',
+                'date' => '09 Agustus 2024',
+                'article_description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae voluptatum eos unde natus? A, assumenda doloribus sit tenetur facilis eum repudiandae quia? Excepturi sint vero ipsa obcaecati! Libero eveniet numquam impedit soluta laborum ratione molestiae, placeat esse quas. Neque, qui! Aut laboriosam eos atque corporis architecto ducimus, vero mollitia quisquam accusamus impedit delectus vel, placeat molestias, earum reiciendis! Ea quisquam quidem illo fugiat nisi inventore ad sit, ipsam animi ipsum delectus doloribus alias veritatis! At culpa perferendis ut, voluptas, dicta officia non cupiditate perspiciatis provident eveniet laborum quis pariatur libero hic molestiae, nam quas veritatis voluptates modi. Nihil ad recusandae maiores qui ducimus impedit nobis perferendis non soluta ut! Assumenda aspernatur magni rem sunt sit explicabo accusamus commodi animi voluptas tenetur reprehenderit quibusdam deserunt repellendus quas pariatur suscipit eum doloribus sed maxime necessitatibus asperiores tempore ea, amet modi? Consequuntur distinctio obcaecati expedita itaque eligendi voluptatem molestias deserunt magnam rem repellat iste inventore, nam quasi suscipit provident velit? Officiis voluptatem, assumenda sequi debitis dicta dolore explicabo et maiores suscipit tempore. Amet, iure cupiditate. Velit, provident id minima incidunt veniam nobis quis voluptates in quasi aspernatur maxime, unde consectetur quam sint dicta debitis, ipsam nihil sunt aliquid rerum doloremque modi? Fugit, recusandae!'
+            ],
+            [
+                'id' => 2,
+                'slug' => 'judul-artikel-2',
+                'article_title' => 'Judul Artikel 2',
+                'author' => 'Banyuwangi Bin Geprek',
+                'date' => '10 Agustus 2024',
+                'article_description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae voluptatum eos unde natus? A, assumenda doloribus sit tenetur facilis eum repudiandae quia? Excepturi sint vero ipsa obcaecati! Libero eveniet numquam impedit soluta laborum ratione molestiae, placeat esse quas. Neque, qui! Aut laboriosam eos atque corporis architecto ducimus, vero mollitia quisquam accusamus impedit delectus vel, placeat molestias, earum reiciendis! Ea quisquam quidem illo fugiat nisi inventore ad sit, ipsam animi ipsum delectus doloribus alias veritatis! At culpa perferendis ut, voluptas, dicta officia non cupiditate perspiciatis provident eveniet laborum quis pariatur libero hic molestiae, nam quas veritatis voluptates modi. Nihil ad recusandae maiores qui ducimus impedit nobis perferendis non soluta ut! Assumenda aspernatur magni rem sunt sit explicabo accusamus commodi animi voluptas tenetur reprehenderit quibusdam deserunt repellendus quas pariatur suscipit eum doloribus sed maxime necessitatibus asperiores tempore ea, amet modi? Consequuntur distinctio obcaecati expedita itaque eligendi voluptatem molestias deserunt magnam rem repellat iste inventore, nam quasi suscipit provident velit? Officiis voluptatem, assumenda sequi debitis dicta dolore explicabo et maiores suscipit tempore. Amet, iure cupiditate. Velit, provident id minima incidunt veniam nobis quis voluptates in quasi aspernatur maxime, unde consectetur quam sint dicta debitis, ipsam nihil sunt aliquid rerum doloremque modi? Fugit, recusandae!'
+            ],
+        ]
     ]);
 });
 
-Route::get('/blog', function () {
-    return view('blog', [
-        'title' => 'Blog Page'
+Route::get('/posts/{slug}', function ($slug) {
+    $posts =
+    [
+        [
+            'id' => 1,
+            'slug' => 'judul-artikel-1',
+            'article_title' => 'Judul Artikel 1',
+            'author' => 'Muhammad Dani Arya Putra',
+            'date' => '09 Agustus 2024',
+            'article_description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae voluptatum eos unde natus? A, assumenda doloribus sit tenetur facilis eum repudiandae quia? Excepturi sint vero ipsa obcaecati! Libero eveniet numquam impedit soluta laborum ratione molestiae, placeat esse quas. Neque, qui! Aut laboriosam eos atque corporis architecto ducimus, vero mollitia quisquam accusamus impedit delectus vel, placeat molestias, earum reiciendis! Ea quisquam quidem illo fugiat nisi inventore ad sit, ipsam animi ipsum delectus doloribus alias veritatis! At culpa perferendis ut, voluptas, dicta officia non cupiditate perspiciatis provident eveniet laborum quis pariatur libero hic molestiae, nam quas veritatis voluptates modi. Nihil ad recusandae maiores qui ducimus impedit nobis perferendis non soluta ut! Assumenda aspernatur magni rem sunt sit explicabo accusamus commodi animi voluptas tenetur reprehenderit quibusdam deserunt repellendus quas pariatur suscipit eum doloribus sed maxime necessitatibus asperiores tempore ea, amet modi? Consequuntur distinctio obcaecati expedita itaque eligendi voluptatem molestias deserunt magnam rem repellat iste inventore, nam quasi suscipit provident velit? Officiis voluptatem, assumenda sequi debitis dicta dolore explicabo et maiores suscipit tempore. Amet, iure cupiditate. Velit, provident id minima incidunt veniam nobis quis voluptates in quasi aspernatur maxime, unde consectetur quam sint dicta debitis, ipsam nihil sunt aliquid rerum doloremque modi? Fugit, recusandae!'
+        ],
+        [
+            'id' => 2,
+            'slug' => 'judul-artikel-2',
+            'article_title' => 'Judul Artikel 2',
+            'author' => 'Banyuwangi Bin Geprek',
+            'date' => '10 Agustus 2024',
+            'article_description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae voluptatum eos unde natus? A, assumenda doloribus sit tenetur facilis eum repudiandae quia? Excepturi sint vero ipsa obcaecati! Libero eveniet numquam impedit soluta laborum ratione molestiae, placeat esse quas. Neque, qui! Aut laboriosam eos atque corporis architecto ducimus, vero mollitia quisquam accusamus impedit delectus vel, placeat molestias, earum reiciendis! Ea quisquam quidem illo fugiat nisi inventore ad sit, ipsam animi ipsum delectus doloribus alias veritatis! At culpa perferendis ut, voluptas, dicta officia non cupiditate perspiciatis provident eveniet laborum quis pariatur libero hic molestiae, nam quas veritatis voluptates modi. Nihil ad recusandae maiores qui ducimus impedit nobis perferendis non soluta ut! Assumenda aspernatur magni rem sunt sit explicabo accusamus commodi animi voluptas tenetur reprehenderit quibusdam deserunt repellendus quas pariatur suscipit eum doloribus sed maxime necessitatibus asperiores tempore ea, amet modi? Consequuntur distinctio obcaecati expedita itaque eligendi voluptatem molestias deserunt magnam rem repellat iste inventore, nam quasi suscipit provident velit? Officiis voluptatem, assumenda sequi debitis dicta dolore explicabo et maiores suscipit tempore. Amet, iure cupiditate. Velit, provident id minima incidunt veniam nobis quis voluptates in quasi aspernatur maxime, unde consectetur quam sint dicta debitis, ipsam nihil sunt aliquid rerum doloremque modi? Fugit, recusandae!'
+        ],
+    ];
+
+    $post = Arr::first($posts, function ($post) use ($slug) {
+        return $post['slug'] == $slug;
+    });
+
+    return view('post', [
+        'title' => 'Detail Article',
+        'post' => $post
     ]);
 });
 
 Route::get('/contact', function () {
-    return view('contact', 
-    [
-        'title' => 'Contact Page',
-        'nama' => 'Muhammad Dani Arya Putra',
-        'email' => 'daniaryap01@gmail.com',
-        'instagram' => '@daniarya_p'
-    ]);
+    return view(
+        'contact',
+        [
+            'title' => 'Contact Page',
+            'nama' => 'Muhammad Dani Arya Putra',
+            'email' => 'daniaryap01@gmail.com',
+            'instagram' => '@daniarya_p'
+        ]
+    );
 });
